@@ -1,0 +1,2 @@
+- Cắt giao diện:
+    +F

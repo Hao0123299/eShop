@@ -1,0 +1,7 @@
+- Cắt giao diện:
+    + Views
+        + layout:
+            + Front:
+            master.blade.php
+                    @yield('body')
+        + Dashboard (admin):

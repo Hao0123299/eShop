@@ -1,0 +1,29 @@
+- Cắt giao diện:
+    + Views
+        + Front
+            + index.blade.php
+                {
+                    @extends('front.layout.master')
+                    @section('title', 'Trang chủ')
+                    @section('body')
+
+                    @endsection
+                }
+            + layout
+                + master.blade.php
+                {
+                    @yield('body')
+                }
+        + Dashboard
+
+- Database:
+    + users
+        id
+        name
+        email
+        email
+        email_verified_at
+        password
+        remember_token
+        avatar
+        

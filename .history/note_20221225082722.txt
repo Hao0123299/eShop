@@ -1,0 +1,6 @@
+- Cắt giao diện:
+    + Views
+        + Front:
+            master.blade.php
+                
+        + Dashboard (admin):
