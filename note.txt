@@ -134,3 +134,222 @@
 - Tạo dữ liệu mẫu: database->seeders: chạy lệnh php artisan db:seed or php artisan migrate:fresh -seed
 - Tạo model : php artisan:make model tên
 - Tạo controller: php artisan make:controller tênController
+- Tạo Reposotory: các lệnh truy vấn cơ sở dữ liệu được thực thi trong đây, giúp bảo mật
+    + app/Repositories/
+        + RepoditoryInterface: interface khuôn mẫu, khái báo các phương thức dùng chung cho model
+        + BaseRepository: implements RepositoryInterface, triển khai các phương thức chung cho các model
+    + app/Product/
+        + ProductRepositoryInterface: interface chứa các phương thức riêng của Model Product.
+        + ProductRepository: implements ProductReposirotyInterface
+    Thay vì viết trực tiếp trong controller ta sẽ khởi tạo $productRepo để truy vấn dữ liệu
+    + app/Providers/AppServiceProvider.php: khởi tạo controller, gán thuộc tính $productRepo có kiểu: ProductRepositoryInterface
+    +Tao RepositoryInterface và BaseRepository
+        + Repository:
+            <?php
+
+            namespace App\Repositories;
+
+            interface RepositoryInterface
+            {
+                /**
+                 * Get all
+                 * @return mixed
+                 */
+                public function getAll();
+
+                /**
+                 * Get one
+                 * @param $id
+                 * @return mixed
+                 */
+                public function find($id);
+
+                /**
+                 * Create
+                 * @param array $attributes
+                 * @return mixed
+                 */
+                public function create($attributes = []);
+
+                /**
+                 * Update
+                 * @param $id
+                 * @param array $attributes
+                 * @return mixed
+                 */
+                public function update($id, $attributes = []);
+
+                /**
+                 * Delete
+                 * @param $id
+                 * @return mixed
+                 */
+                public function delete($id);
+            }
+    + BaseRepository
+        <?php
+
+        namespace App\Repositories;
+
+        use App\Repositories\RepositoryInterface;
+
+        abstract class BaseRepository implements RepositoryInterface
+        {
+            //model muốn tương tác
+            protected $model;
+
+           //khởi tạo
+            public function __construct()
+            {
+                $this->setModel();
+            }
+
+            //lấy model tương ứng
+            abstract public function getModel();
+
+            /**
+             * Set model
+             */
+            public function setModel()
+            {
+                $this->model = app()->make(
+                    $this->getModel()
+                );
+            }
+
+            public function getAll()
+            {
+                return $this->model->all();
+            }
+
+            public function find($id)
+            {
+                $result = $this->model->find($id);
+
+                return $result;
+            }
+
+            public function create($attributes = [])
+            {
+                return $this->model->create($attributes);
+            }
+
+            public function update($id, $attributes = [])
+            {
+                $result = $this->find($id);
+                if ($result) {
+                    $result->update($attributes);
+                    return $result;
+                }
+
+                return false;
+            }
+
+            public function delete($id)
+            {
+                $result = $this->find($id);
+                if ($result) {
+                    $result->delete();
+
+                    return true;
+                }
+
+                return false;
+            }
+        }
+- Viết Interface và Repository cho Model ở dây là
+    + ProductRepositoryInterface
+        <?php
+        namespace App\Repositories\Product;
+
+        use App\Repositories\RepositoryInterface;
+
+        interface ProductRepositoryInterface extends RepositoryInterface
+        {
+            //ví dụ: lấy 5 sản phầm đầu tiên
+            public function getProduct();
+        }
+    + ProductRepository
+        <?php
+        namespace App\Repositories\Post;
+
+        use App\Repositories\BaseRepository;
+
+        class ProductRepository extends BaseRepository implements ProductRepositoryInterface
+        {
+            //lấy model tương ứng
+            public function getModel()
+            {
+                return \App\Models\Product::class;
+            }
+
+            public function getProduct()
+            {
+                return $this->model->select('product_name')->take(5)->get();
+            }
+        }
+- Tạo controller:
+    <?php
+
+    namespace App\Http\Controllers;
+
+    use Illuminate\Http\Request;
+    use App\Repositories\Product\ProductRepositoryInterface;
+
+    class ProductController extends Controller
+    {
+        /**
+         * @var PostRepositoryInterface|\App\Repositories\Repository
+         */
+        protected $productRepo;
+
+        public function __construct(ProductRepositoryInterface $productRepo)
+        {
+            $this->productRepo = $productRepo;
+        }
+
+        public function index()
+        {
+            $products = $this->productRepo->getAll();
+
+            return view('home.products', ['products' => $products]);
+        }
+
+        public function show($id)
+        {
+            $product = $this->productRepo->find($id);
+
+            return view('home.product', ['product' => $product]);
+        }
+
+        public function store(Request $request)
+        {
+            $data = $request->all();
+
+            //... Validation here
+
+            $product = $this->productRepo->create($data);
+
+            return view('home.products');
+        }
+
+        public function update(Request $request, $id)
+        {
+            $data = $request->all();
+
+            //... Validation here
+
+            $product = $this->productRepo->update($id, $data);
+
+            return view('home.products');
+        }
+
+        public function destroy($id)
+        {
+            $this->productRepo->delete($id);
+
+            return view('home.products');
+        }
+    }
+
+
