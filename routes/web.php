@@ -1,6 +1,7 @@
 <?php
 
     use App\Repositories\Product\ProductRepositoryInterface;
+    use App\Service\Product\ProductServiceInterface;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Front;
 
@@ -15,8 +16,8 @@
 |
 */
 
-Route::get('/', [Front\HomeController::class, 'index']);
-//Route::get('/', function (ProductRepositoryInterface $productRepository) {
-//    return $productRepository->find(1);
-//});
+//Route::get('/', [Front\HomeController::class, 'index']);
+Route::get('/', function (ProductServiceInterface $productService) {
+    return $productService->all();
+});
 //Route::get('/shop/product/{id}', [Front\ShopController::class, 'show']);

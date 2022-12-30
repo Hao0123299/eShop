@@ -351,5 +351,23 @@
             return view('home.products');
         }
     }
+- Khai báo trong app\Proviceders  (ProductService)
+     $this->app->singleton(
+                ProductRepositoryInterface::class,
+                ProductRepository::class
+            );
+- Tạo ProductRepository
+- Tạo Service Product
+    + app/Service
+        + BaseService
+        + ServiceInterface
+    + app/Service/ProductService
+        + ProductService.php (class)
+        + ProductServiceInterface.php (interface)
+-  Khai báo trong app\Proviceders (ProductService)
+    $this->app->singleton(
+                ProductServiceInterface::class,
+                ProductService::class
+            );
 
 
