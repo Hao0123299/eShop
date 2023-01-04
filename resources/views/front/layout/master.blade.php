@@ -77,13 +77,17 @@
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-7">
-                        <div class="advanced-search">
-                            <button type="button" class="category-btn">All category</button>
-                            <div class="input-group">
-                                <input type="text" placeholder="Bạn cần gì ?">
-                                <button type="button"><i class="ti-search"></i></button>
+                        <form action="shop">
+                            <div class="advanced-search">
+                                <button type="button" class="category-btn">All category</button>
+                                <div class="input-group">
+                                    <input name="search" value="{{ request('search') }}" type="text" placeholder="Bạn cần gì ?">
+                                    <button type="submit"><i class="ti-search"></i></button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
+
                     </div>
                     <div class="col-lg-3 col-md-3 text-right">
                         <ul class="nav-right">

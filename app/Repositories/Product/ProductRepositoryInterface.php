@@ -8,4 +8,5 @@
 	{
         public function getRelatedProducts($product, $limit = 4);  //khai báo hàm ProductRepository
         public function getFeaturedProductsByCategory(int $categoryId);
+        public function getProductOnIndex($request);
     }

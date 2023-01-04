@@ -25,8 +25,34 @@
                 ->get();
         }
 
-        public function getProductOnIndex(){
-            $products = $this->model->paginate(3);
+        public function getProductOnIndex($request){
+            $perPage = $request->show ?? 3;
+            $sortBy = $request->sort_by ?? 'latest';
+            $search = $request->search ?? '';
+            $products = $this->model->where('name', 'like', '%'.$search.'%');
+
+            switch ($sortBy){
+                case 'latest':
+                    $products = $products->orderBy('id');
+                    break;
+                case 'name-asc';
+                    $products = $products->orderBy('name');
+                    break;
+                case 'name-desc';
+                    $products = $products->orderByDesc('name');
+                    break;
+                case 'price-asc';
+                    $products = $products->orderBy('price');
+                    break;
+                case 'price-desc';
+                    $products = $products->orderByDesc('price');
+                    break;
+                default;
+                    $products = $products->orderBy('id');
+
+            }
+            $products = $products->paginate($perPage);
+            $products->appends(['sort_by'=> $sortBy, 'show'=> $perPage]);
             return $products;
         }
     }

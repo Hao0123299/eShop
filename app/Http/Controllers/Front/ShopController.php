@@ -29,9 +29,9 @@ class ShopController extends Controller
         $this->productCommentService->create($request->all());
         return redirect()->back();
     }
-    public function index(){
+    public function index(Request $request){
 
-        $products = $this->productService->getProductOnIndex();
+        $products = $this->productService->getProductOnIndex($request);
         return view('front.shop.index', compact('products'));
     }
 }
