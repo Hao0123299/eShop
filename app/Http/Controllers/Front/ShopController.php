@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+
 use App\Services\Product\ProductServiceInterface;
 use App\Services\ProductComment\ProductCommentServiceInterface;
 use Illuminate\Http\Request;
@@ -22,10 +22,16 @@ class ShopController extends Controller
 
     public function show($id){
         $product = $this->productService->find($id); //gọi tới productService để lấy dữ liệu
-        return view('front.shop.show', compact('product'));
+        $relatedProducts = $this->productService->getRelatedProducts($product);
+        return view('front.shop.show', compact('product', 'relatedProducts'));
     }
     public function postComment(Request $request){
         $this->productCommentService->create($request->all());
         return redirect()->back();
+    }
+    public function index(){
+
+        $products = $this->productService->getProductOnIndex();
+        return view('front.shop.index', compact('products'));
     }
 }

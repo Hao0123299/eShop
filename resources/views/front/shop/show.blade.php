@@ -360,7 +360,7 @@
                                                     <div class="col-lg-12">
                                                         <textarea name="messages" placeholder="Bình luận"></textarea>
                                                         <div class="personal-rating">
-                                                            <h6>Your Rating</h6>
+                                                            <h6>Đánh giá sao</h6>
                                                             <div class="rate">
                                                                 <input type="radio" id="star5" name="rating" value="5" />
                                                                 <label for="star5" title="text">5 stars</label>
@@ -391,123 +391,53 @@
     <!--Product Shop Section End-->
 
     <!--Related product section begin-->
-    <div class="related-product spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Sản phẩm liên quan</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="front/img/products/product-1.jpg" alt="">
-                            <div class="sale pp-sale">Sale</div>
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
-                            </div>
-                            <ul>
-                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                <li class="quick-view"><a href="product.html">Quick View</a></li>
-                                <li class="w-icon"><a href=""><i class="fa fa-random"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <div class="catagory-name">Towel</div>
-                            <a href="#">
-                                <h5>Pure Pino</h5>
-                            </a>
-                            <div class="product-price">
-                                15.000
-                                <span>50.000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="front/img/products/product-1.jpg" alt="">
-                            <div class="sale pp-sale">Sale</div>
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
-                            </div>
-                            <ul>
-                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                <li class="quick-view"><a href="product.html">Quick View</a></li>
-                                <li class="w-icon"><a href=""><i class="fa fa-random"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <div class="catagory-name">Towel</div>
-                            <a href="#">
-                                <h5>Pure Pino</h5>
-                            </a>
-                            <div class="product-price">
-                                15.000
-                                <span>50.000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="front/img/products/product-1.jpg" alt="">
-                            <div class="sale pp-sale">Sale</div>
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
-                            </div>
-                            <ul>
-                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                <li class="quick-view"><a href="product.html">Quick View</a></li>
-                                <li class="w-icon"><a href=""><i class="fa fa-random"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <div class="catagory-name">Towel</div>
-                            <a href="#">
-                                <h5>Pure Pino</h5>
-                            </a>
-                            <div class="product-price">
-                                15.000
-                                <span>50.000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="front/img/products/product-1.jpg" alt="">
-                            <div class="sale pp-sale">Sale</div>
-                            <div class="icon">
-                                <i class="icon_heart_alt"></i>
-                            </div>
-                            <ul>
-                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                <li class="quick-view"><a href="product.html">Quick View</a></li>
-                                <li class="w-icon"><a href=""><i class="fa fa-random"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <div class="catagory-name">Towel</div>
-                            <a href="#">
-                                <h5>Pure Pino</h5>
-                            </a>
-                            <div class="product-price">
-                                15.000
-                                <span>50.000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="related-product spad">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-12">--}}
+{{--                    <div class="section-title">--}}
+{{--                        <h2>Sản phẩm liên quan</h2>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="row">--}}
+{{--                @foreach($relatedProducts as $product)--}}
+{{--                    <div class="col-lg-3 col-sm-6">--}}
+{{--                        <div class="product-item">--}}
+{{--                            <div class="pi-pic">--}}
+{{--                                <img src="front/img/products/{{ $product->productImage[0]->path }}" alt="">--}}
+{{--                                @if($product->discount != null)--}}
+{{--                                    <div class="sale pp-sale">Sale</div>--}}
+{{--                                @endif--}}
+{{--                                <div class="icon">--}}
+{{--                                    <i class="icon_heart_alt"></i>--}}
+{{--                                </div>--}}
+{{--                                <ul>--}}
+{{--                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>--}}
+{{--                                    <li class="quick-view"><a href="shop/product/{{ $product->id }}">Xem nhanh</a></li>--}}
+{{--                                    <li class="w-icon"><a href=""><i class="fa fa-random"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                            <div class="pi-text">--}}
+{{--                                <div class="catagory-name">{{ $product->tag }}</div>--}}
+{{--                                <a href="shop/product/{{ $product->id }}">--}}
+{{--                                    <h5>{{ $product->name }}</h5>--}}
+{{--                                </a>--}}
+{{--                                <div class="product-price">--}}
+{{--                                    @if($product->discount != null)--}}
+{{--                                        {{ $product->discount }}--}}
+{{--                                        <span>{{ $product->price }}</span>--}}
+{{--                                    @else--}}
+{{--                                        <span>{{ $product->price }}</span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <!--Related product section end-->
 
 

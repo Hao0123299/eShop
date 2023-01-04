@@ -6,5 +6,6 @@
 
     interface ProductRepositoryInterface extends RepositoryInterface
 	{
-
-	}
+        public function getRelatedProducts($product, $limit = 4);  //khai báo hàm ProductRepository
+        public function getFeaturedProductsByCategory(int $categoryId);
+    }

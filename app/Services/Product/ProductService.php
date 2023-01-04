@@ -29,5 +29,19 @@
             $product->avgRating = $avgRating;
             return $product;
         }
+        public function getRelatedProducts($product, $limit = 4){
+            $this->repository->getRelatedProducts($product, $limit);
+        }
+
+        public function getFeaturedProducts(){
+            return [
+                "men" => $this->repository->getFeaturedProductsByCategory(1),
+                "women" => $this->repository->getFeaturedProductsByCategory(2),
+            ];
+        }
+        public function getProductOnIndex(){
+
+            return $this->repository->getProductOnIndex();
+        }
     }
 
