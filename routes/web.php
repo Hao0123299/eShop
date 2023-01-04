@@ -1,7 +1,7 @@
 <?php
 
     use App\Repositories\Product\ProductRepositoryInterface;
-    use App\Service\Product\ProductServiceInterface;
+    use App\Services\Product\ProductServiceInterface;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Front;
 
@@ -20,4 +20,5 @@
 Route::get('/', function (ProductServiceInterface $productService) {
     return $productService->all();
 });
-//Route::get('/shop/product/{id}', [Front\ShopController::class, 'show']);
+Route::get('/shop/product/{id}', [Front\ShopController::class, 'show']);
+Route::post('/shop/product/{id}', [Front\ShopController::class, 'postComment']);

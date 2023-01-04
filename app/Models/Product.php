@@ -16,30 +16,25 @@ class Product extends Model
     public function brand(){
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
-
     //product -> ProductCategory
     public function productcategory()
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
-
     //product->productImage
     public function productImages(){
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
-
     //product->productDetails
     public function productDetails()
     {
         return $this->hasMany(ProductDetail::class, 'product_id', 'id');
     }
-
     //product->productComment
-    public function productComment()
+    public function productComments()
     {
         return $this->hasMany(ProductComment::class, 'product_id', 'id');
     }
-
     //product->OrderDetails
     public function orderDetails()
     {

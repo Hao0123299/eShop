@@ -2,4 +2,4 @@
 
 namespace App\Repositories;
 
-class BaseRepositories implements RepositoriesInterface
+class BaseRepository implements RepositoryInterface
