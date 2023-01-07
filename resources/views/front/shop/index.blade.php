@@ -26,11 +26,13 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 products-sidebar-filter">
                     <div class="filter-widget">
-                        <h4 class="fw-title">Categories</h4>
+                        <h4 class="fw-title">Danh mục sản phẩm</h4>
                         <ul class="filter-catagories">
-                            <li><a href="#">Men</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Kids</a></li>
+                            @foreach($categories as $category)
+                                <li><a href="shop/category/{{ $category->name }}">{{ $category->name }}</a></li>
+                            @endforeach
+
+
                         </ul>
                     </div>
                     <div class="filter-widget">
