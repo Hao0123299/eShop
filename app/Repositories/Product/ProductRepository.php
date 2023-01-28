@@ -3,7 +3,10 @@
 	namespace App\Repositories\Product;
 
 	use App\Models\Product;
+    use App\Models\ProductCategory;
     use App\Repositories\BaseRepository;
+
+    use Illuminate\Http\Request;
     use function PHPUnit\Framework\isTrue;
 
     class ProductRepository extends BaseRepository implements ProductRepositoryInterface
@@ -26,11 +29,21 @@
         }
 
         public function getProductOnIndex($request){
-            $perPage = $request->show ?? 3;
-            $sortBy = $request->sort_by ?? 'latest';
+
             $search = $request->search ?? '';
             $products = $this->model->where('name', 'like', '%'.$search.'%');
 
+            $products = $this->sortAndPagination($products, $request);
+            return $products;
+        }
+        public function getProductsByCategory($categoryName, $request){
+            $products = ProductCategory::where('name', $categoryName)->first()->products->toQuery();
+            $products = $this->sortAndPagination($products, $request);
+            return $products;
+        }
+        private function sortAndPagination($products, Request $request){
+            $perPage = $request->show ?? 3;
+            $sortBy = $request->sort_by ?? 'latest';
             switch ($sortBy){
                 case 'latest':
                     $products = $products->orderBy('id');

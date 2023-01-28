@@ -43,5 +43,8 @@
 
             return $this->repository->getProductOnIndex($request);
         }
+        public function getProductsByCategory($categoryName, $request){
+            return $this->repository->getProductsByCategory($categoryName, $request);
+        }
     }
 

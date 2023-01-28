@@ -38,4 +38,10 @@ class ShopController extends Controller
         $products = $this->productService->getProductOnIndex($request);
         return view('front.shop.index', compact('products', 'categories'));
     }
+    public function category($categoryName, Request $request){
+        $categories = $this->productCategoryService->all();
+        $products = $this->productService->getProductsByCategory($categoryName, $request);
+
+        return view('front.shop.index', compact( 'categories', 'products'));
+    }
 }
