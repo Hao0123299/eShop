@@ -32,13 +32,16 @@
 
             $search = $request->search ?? '';
             $products = $this->model->where('name', 'like', '%'.$search.'%');
-
+            $products = $this->filter($products, $request);
             $products = $this->sortAndPagination($products, $request);
+
             return $products;
         }
         public function getProductsByCategory($categoryName, $request){
             $products = ProductCategory::where('name', $categoryName)->first()->products->toQuery();
+            $products = $this->filter($products, $request);
             $products = $this->sortAndPagination($products, $request);
+
             return $products;
         }
         private function sortAndPagination($products, Request $request){
@@ -66,6 +69,14 @@
             }
             $products = $products->paginate($perPage);
             $products->appends(['sort_by'=> $sortBy, 'show'=> $perPage]);
+            return $products;
+        }
+
+        private function filter($products, Request $request){
+            //brands
+            $brands = $request->brand ?? [];
+            $brands_ids = array_keys($brands);
+            $products = $brands_ids != null ? $products->whereIn('brand_id', $brands_ids) : $products;
             return $products;
         }
     }
