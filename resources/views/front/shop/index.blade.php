@@ -36,29 +36,19 @@
                         </ul>
                     </div>
                     <div class="filter-widget">
-                        <h4 class="fw-title">Brand</h4>
+                        <h4 class="fw-title">Thương hiệu</h4>
                         <div class="fw-brand-check">
-                            <div class="bc-item">
-                                <label for="bc-calvin">
-                                    Calvin Klein
-                                    <input type="checkbox" id="bc-calvin">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="bc-item">
-                                <label for="bc-calvin">
-                                    Calvin Klein
-                                    <input type="checkbox" id="bc-calvin">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="bc-item">
-                                <label for="bc-calvin">
-                                    Calvin Klein
-                                    <input type="checkbox" id="bc-calvin">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
+                            @foreach($brands as $brand)
+                                <div class="bc-item">
+                                    <label for="bc-{{$brand->id}}">
+                                        {{$brand->name}}
+                                        <input type="checkbox" id="bc-{{$brand->id}}">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            @endforeach
+
+
                         </div>
                     </div>
                     <div class="filter-widget">
