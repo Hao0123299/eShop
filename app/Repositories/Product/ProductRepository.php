@@ -77,6 +77,16 @@
             $brands = $request->brand ?? [];
             $brands_ids = array_keys($brands);
             $products = $brands_ids != null ? $products->whereIn('brand_id', $brands_ids) : $products;
+
+            //price
+            $priceMin = $request->price_min;
+            $priceMax = $request->price_max;
+
+            $priceMin = str_replace('$', '', $priceMin);
+            $priceMax = str_replace('$', '', $priceMax);
+
+            $products = ($priceMin != null && $priceMax != null) ? $products->whereBetween('price', [$priceMin, $priceMax]) : $products;
+
             return $products;
         }
     }
