@@ -1,9 +1,6 @@
-
 @extends('front.layout.master')
 @section('title', 'Shop');
 @section('body')
-
-
 
     <!--Breadcrumb section begin-->
     <div class="breacrumb-section">
@@ -45,7 +42,7 @@
                                                    {{ (request("brand")[$brand->id] ?? '') == 'on' ? 'checked' : '' }}
                                                    id="bc-{{$brand->id}}"
                                                    name="brand[{{$brand->id}}]"
-                                            onchange="this.form.submit();">
+                                                   onchange="this.form.submit();">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -63,7 +60,8 @@
                                 </div>
 
 
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                <div
+                                    class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                     data-min="0" data-max="999"
                                     data-min-value="{{ str_replace('$', '', request('price_min')) }}"
                                     data-max-value="{{ str_replace('$', '', request('price_max')) }}">
@@ -75,32 +73,47 @@
                             <button type="submit" class="filter-btn">Lọc</button>
                         </div>
                         <div class="filter-widget">
-                            <h4 class="fw-title">Color</h4>
+                            <h4 class="fw-title">Màu</h4>
                             <div class="fw-color-choose">
+
                                 <div class="cs-item">
-                                    <input type="radio" id="cs-black">
-                                    <label class="cs-black" for="cs-black">black</label>
+                                    <input type="radio" id="cs-black" name="color" value="black"
+                                           onchange="this.form.submit();"
+                                            {{ request('color') == 'black' ? 'checked' : '' }}>
+                                    <label class="cs-black {{ request('color') == 'black' ? 'font-weight-bold' : '' }} " for="cs-black">Black</label>
                                 </div>
                                 <div class="cs-item">
-                                    <input type="radio" id="cs-violet">
-                                    <label class="cs-violet" for="cs-violet">violet</label>
+                                    <input type="radio" id="cs-violet" name="color" value="violet"
+                                           onchange="this.form.submit();"
+                                            {{ request('color') == 'violet' ? 'checked' : '' }}>
+                                    <label class="cs-violet {{ request('color') == 'violet' ? 'font-weight-bold' : '' }}" for="cs-violet">Violet</label>
                                 </div>
                                 <div class="cs-item">
-                                    <input type="radio" id="cs-blue">
-                                    <label class="cs-blue" for="cs-blue">blue</label>
+                                    <input type="radio" id="cs-blue" name="color" value="blue"
+                                           onchange="this.form.submit();"
+                                            {{ request('color') == 'blue' ? 'checked' : '' }}>
+                                    <label class="cs-blue {{ request('color') == 'blue' ? 'font-weight-bold' : '' }}" for="cs-blue">Blue</label>
                                 </div>
                                 <div class="cs-item">
-                                    <input type="radio" id="cs-red">
-                                    <label class="cs-red" for="cs-red">red</label>
+                                    <input type="radio" id="cs-red" name="color" value="red"
+                                           onchange="this.form.submit();"
+                                        {{ request('color') == 'red' ? 'checked' : '' }}>
+                                    <label class="cs-red {{ request('color') == 'red' ? 'font-weight-bold' : '' }}" for="cs-red">Red</label>
                                 </div>
                                 <div class="cs-item">
-                                    <input type="radio" id="cs-yellow">
-                                    <label class="cs-yellow" for="cs-yellow">yellow</label>
+                                    <input type="radio" id="cs-green" name="color" value="green"
+                                           onchange="this.form.submit();"
+                                        {{ request('color') == 'green' ? 'checked' : '' }}>
+                                    <label class="cs-green {{ request('color') == 'green' ? 'font-weight-bold' : '' }}" for="cs-green">Green</label>
                                 </div>
                                 <div class="cs-item">
-                                    <input type="radio" id="cs-green">
-                                    <label class="cs-green" for="cs-green">green</label>
+                                    <input type="radio" id="cs-yellow" name="color" value="yellow"
+                                           onchange="this.form.submit();"
+                                        {{ request('color') == 'yellow' ? 'checked' : '' }}>
+                                    <label class="cs-yellow {{ request('color') == 'yellow' ? 'font-weight-bold' : '' }}" for="cs-yellow">Yellow</label>
                                 </div>
+
+
                             </div>
                         </div>
                         <div class="filter-widget">
@@ -145,16 +158,35 @@
                                 <form action="">
                                     <div class="select-option">
                                         <select name="sort_by" onchange="this.form.submit();" class="sorting">
-                                            <option {{ request('sort_by') == 'lastest' ? 'selected' : '' }} value="lastest">Mặc định</option>
-                                            <option {{ request('sort_by') == 'name-asc' ? 'selected' : '' }} value="name-asc">Tên: A - Z</option>
-                                            <option {{ request('sort_by') == 'name-desc' ? 'selected' : '' }} value="name-desc">Tên: Z - A</option>
-                                            <option {{ request('sort_by') == 'price-asc' ? 'selected' : '' }} value="price-asc">Giá: Thấp - Cao</option>
-                                            <option {{ request('sort_by') == 'price-desc' ? 'selected' : '' }} value="price-desc">Giá: Cao - Thấp</option>
+                                            <option
+                                                {{ request('sort_by') == 'lastest' ? 'selected' : '' }} value="lastest">
+                                                Mặc định
+                                            </option>
+                                            <option
+                                                {{ request('sort_by') == 'name-asc' ? 'selected' : '' }} value="name-asc">
+                                                Tên: A - Z
+                                            </option>
+                                            <option
+                                                {{ request('sort_by') == 'name-desc' ? 'selected' : '' }} value="name-desc">
+                                                Tên: Z - A
+                                            </option>
+                                            <option
+                                                {{ request('sort_by') == 'price-asc' ? 'selected' : '' }} value="price-asc">
+                                                Giá: Thấp - Cao
+                                            </option>
+                                            <option
+                                                {{ request('sort_by') == 'price-desc' ? 'selected' : '' }} value="price-desc">
+                                                Giá: Cao - Thấp
+                                            </option>
                                         </select>
                                         <select name="show" onchange="this.form.submit();" class="sorting">
-                                            <option {{ request('show') == '3' ? 'selected' : '' }} value="3">Show: 3</option>
-                                            <option {{ request('show') == '9' ? 'selected' : '' }} value="9">Show: 9</option>
-                                            <option {{ request('show') == '15' ? 'selected' : '' }} value="15">Show: 15</option>
+                                            <option {{ request('show') == '3' ? 'selected' : '' }} value="3">Show: 3
+                                            </option>
+                                            <option {{ request('show') == '9' ? 'selected' : '' }} value="9">Show: 9
+                                            </option>
+                                            <option {{ request('show') == '15' ? 'selected' : '' }} value="15">Show:
+                                                15
+                                            </option>
                                         </select>
 
                                     </div>
@@ -181,8 +213,10 @@
                                                 <i class="icon_heart_alt"></i>
                                             </div>
                                             <ul>
-                                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                                <li class="quick-view"><a href="shop/product/{{ $product->id }}">Xem nhanh</a></li>
+                                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a>
+                                                </li>
+                                                <li class="quick-view"><a href="shop/product/{{ $product->id }}">Xem
+                                                        nhanh</a></li>
                                                 <li class="w-icon"><a href=""><i class="fa fa-random"></i></a></li>
                                             </ul>
                                         </div>
