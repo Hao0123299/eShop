@@ -95,6 +95,14 @@
                 })
                 : $products;
 
+            //Size
+            $size = $request->size;
+            $products = $size != null
+                ? $products->whereHas('productDetails', function ($query) use ($size){
+                    return $query->where('size', $size)->where('qty', '>', 0);
+                })
+                : $products;
+
             return $products;
         }
     }
