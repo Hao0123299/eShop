@@ -20,6 +20,8 @@ class HomeController extends Controller
         //Hiển thị sản phẩm ra trang chủ
         $menProduct = Product::where('featured', true)->where('product_category_id', 1)->get();
         $womenProduct = Product::where('featured', true)->where('product_category_id', 2)->get();
+//        $men = Product::where('featured', true)->where('product_category_id', 1)->get();
+//        $women = Product::where('featured', true)->where('product_category_id', 2)->get();
 
         //Hiển thị 3 blogs mới nhất ra trang chủ
         $blogs = Blog::orderBy('id', 'desc')->limit(3)->get();
